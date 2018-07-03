@@ -4,7 +4,9 @@
   "description": "This is a simple webpack 4 setup to build simple static sites",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist",
+    "dev": "webpack-dev-server --progress --mode development",
+    "build": "npm run clean && webpack --mode production"
   },
   "repository": {
     "type": "git",
