@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "NotoSansCJKjp";
+  font-style: normal;
+  font-weight: 700;
+  // src: url('../../font/web/NotoSansCJKjp.eot');
+  src: local('Noto Sans CJK JP'), 
+    //  url('../../font/web/NotoSansCJKjp.eot?#iefix') format('embedded-opentype'),
+      url('../fonts/NotoSansCJKjp.woff') format('woff'),
+      url('../fonts/NotoSansCJKjp.otf') format('opentype')
+}
+
+@font-face {
+  font-family: "NotoSansCJKRegularjp";
+  font-style: normal;
+  font-weight: normal;
+  // src: url('../../font/web/NotoSansCJKjp.eot');
+  src: local('Noto Sans CJK JP'), 
+    //  url('../../font/web/NotoSansCJKjp.eot?#iefix') format('embedded-opentype'),
+      url('../fonts/NotoSansCJKRegularjp.woff') format('woff'),
+      url('../fonts/NotoSansCJKRegularjp.otf') format('opentype')
+}

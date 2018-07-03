@@ -1,0 +1,24 @@
+@import './vendor/_normalize';
+
+@import './base/_variables';
+@import './base/mixins/_breakpoints';
+
+// @import './partials/';
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: $FONT_FAMILY_NOTO;
+  color: $TEXT_PRIMARY_COLOR;
+  background-image: url('../images/sky.jpg');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: cover;
+}
+
+.title {
+  width: 80%;
+  margin: 10% auto 0;
+  text-align: center;
+  padding: 20px;
+}

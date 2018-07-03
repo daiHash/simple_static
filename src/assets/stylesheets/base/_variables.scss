@@ -1,0 +1,52 @@
+@import '../fonts/_fonts';
+
+/**
+ * ----------------------------------------------------------------
+ *  FONT FAMILY VARIABLES
+ * ----------------------------------------------------------------
+ */
+$FONT_FAMILY_ALL: "Noto Sans", "Noto Sans CJK JP", "NotoSansCJKjp", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3",HiraKakuProN-W3,NanumGothic,"Malgun Gothic",sans-serif;
+$FONT_FAMILY_NOTO: "NotoSansCJKRegularjp", "Noto Sans", "Noto Sans CJK JP", "Hiragino Kaku Gothic Pro", "メイリオ",Meiryo,"ヒラギノ角ゴ Pro W3",HiraKakuProN-W3,NanumGothic,"Malgun Gothic",sans-serif;
+// $FONT_FAMILY_IE: "NotoSansCJKRegularjp", "Noto Sans", "Noto Sans CJK JP", "Hiragino Kaku Gothic Pro", "メイリオ",Meiryo,"ヒラギノ角ゴ Pro W3",HiraKakuProN-W3,NanumGothic,"Malgun Gothic",sans-serif;
+$FONT_FAMILY_HEADING: "NotoSansCJKjp", sans-serif;
+/**
+ * -------------------------Å---------------------------------------
+ *  COLOR VARIABLES
+ * ----------------------------------------------------------------
+ */
+
+// THEME COLOR
+$PRIMARY_COLOR: #4DBFD2;
+$SECONDARY_COLOR: #FB8B1F;
+$COLOR_WHITE: #ffffff;
+
+//  BACKGROUND COLOR
+$BG_PRIMARY_COLOR: #FFFFFF;
+$BG_SECONDARY_COLOR: #EEEEEE;
+
+//  TEXT COLOR
+$TEXT_PRIMARY_COLOR: #444444;
+
+/**
+ * ----------------------------------------------------------------
+ *  FONT SIZE VARIABLES
+ * ----------------------------------------------------------------
+ */
+
+// PC
+$PC_H1_FONT_SIZE: 48px;
+$PC_H2_FONT_SIZE: 36px;
+$PC_H3_FONT_SIZE: 28px;
+$PC_H4_FONT_SIZE: 24px;
+$PC_H5_FONT_SIZE: 20px;
+$PC_H6_FONT_SIZE: 20px;
+$PC_PARAGRAPH_FONT_SIZE: 16px;
+
+// MOBILE
+$SP_H1_FONT_SIZE: 32px;
+$SP_H2_FONT_SIZE: 24px;
+$SP_H3_FONT_SIZE: 22px;
+$SP_H4_FONT_SIZE: 16px;
+$SP_H5_FONT_SIZE: 18px;
+$SP_H6_FONT_SIZE: 16px;
+$SP_PARAGRAPH_FONT_SIZE: 14px;
