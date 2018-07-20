@@ -8,6 +8,8 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
+let FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+
 const NODE_ENV = process.env.NODE_ENV;
 
 const buildingForLocal = () => {
@@ -153,6 +155,22 @@ const config  = {
   },
   plugins: [
     new FriendlyErrorsWebpackPlugin(),
+    new FaviconsWebpackPlugin({
+      logo: './assets/images/morty.png',
+      background: 'transparent',
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
+      }
+    }),
     new ExtractTextPlugin('./assets/css/style.css'),
     new CopyWebpackPlugin([
       {
