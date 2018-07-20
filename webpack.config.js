@@ -70,9 +70,8 @@ const config  = {
       {
         test: /\.pug$/,
         loaders: 'pug-loader',
-        // Add this option to disable minification when building
         query: {
-          pretty: true
+          pretty: true // Add this option to disable minification when building
         }
       },
       {
@@ -93,7 +92,6 @@ const config  = {
               options: {
                 sourceMap: true,
                 plugins: [
-                  // Generate vendor prefixes
                   require('autoprefixer')({
                     'browsers': ['> 1%', 'last 2 versions']
                   })
@@ -155,9 +153,10 @@ const config  = {
   },
   plugins: [
     new FriendlyErrorsWebpackPlugin(),
+    // Create a favicon for each devices you have specified.
     new FaviconsWebpackPlugin({
       logo: './assets/images/morty.png',
-      background: 'transparent',
+      persistentCache: true,
       icons: {
         android: true,
         appleIcon: true,
@@ -168,7 +167,7 @@ const config  = {
         opengraph: false,
         twitter: false,
         yandex: false,
-        windows: false
+        windows: true
       }
     }),
     new ExtractTextPlugin('./assets/css/style.css'),
