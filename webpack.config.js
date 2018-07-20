@@ -5,13 +5,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-// If you want use BrowserSync:
-// - npm i -D browser-sync browser-sync-webpack-plugin
-// - Take the comments here and on line 151 ~ 168
-// - Also add this npm scripts in the package.json file:
-//    "watch": "webpack-dev-server --watch --progress --mode development",
-// const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV;
 
@@ -19,14 +14,34 @@ const buildingForLocal = () => {
   return (NODE_ENV === 'development');
 };
 
-module.exports = {
+// todo Trying to generate multiple html files passing just and array of the pages path.
+// function generateHTMLTemplate(temaplateDir) {
+//   temaplateDir.map(template => {
+//     const parts = template.split('/');
+//     const dirName = parts[2];
+//     const page = parts[3];
+//     return new HtmlWebPackPlugin({
+//       filename: `${dirName}/index.html`,
+//       template: `./src/pug/pages/${dirName}/${page}`
+//       // template: path.resolve(__dirname, `${templateDir}/${name}.${extension}`)
+//     })
+//   })
+// }
+
+const config  = {
   mode: buildingForLocal() ? 'development' : 'production',
+  context: path.resolve(__dirname, 'src'),
   entry: {
-    main: "./src/assets/js/index.js"
+    main: './assets/js/index.js'
   },
   output: {
-      path: path.join(__dirname, "dist"),
-      filename: "assets/js/[name].js"
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'assets/js/[name].js'
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
   },
   resolve: {
     extensions: ['.js'],
@@ -37,6 +52,7 @@ module.exports = {
   devServer: {
     quiet: true
   },
+  devtool: buildingForLocal() ? 'cheap-module-eval-source-map' : undefined,
   module: {
     rules: [
       {
@@ -73,11 +89,9 @@ module.exports = {
             {
               loader: 'postcss-loader',
               options: {
-                // PostCSS側でもソースマップを有効にする
                 sourceMap: true,
                 plugins: [
-                  // Autoprefixerを有効化
-                  // ベンダープレフィックスを自動付与する
+                  // Generate vendor prefixes
                   require('autoprefixer')({
                     'browsers': ['> 1%', 'last 2 versions']
                   })
@@ -87,7 +101,8 @@ module.exports = {
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: true,
+                outputStyle: 'expanded',
+                sourceMap: true
               }
             }
           ]
@@ -141,48 +156,56 @@ module.exports = {
     new ExtractTextPlugin('./assets/css/style.css'),
     new CopyWebpackPlugin([
       {
-        from:'./src/assets/images',
+        from:'./assets/images',
         to:'./assets/images',
         ignore: ['.*']
       }
     ]),
     new CopyWebpackPlugin([
       {
-        from:'./src/assets/fonts',
+        from:'./assets/fonts',
         to:'./assets/fonts',
         ignore: ['.*']
       }
     ]),
     new HtmlWebPackPlugin({
-      template: "./src/pug/index.pug",
+      template: "./pug/index.pug",
       filename: "index.html",
       inject: true,
       chunksSortMode: 'dependency'
     }),
-    // new BrowserSyncPlugin(
-    //   // BrowserSync options
-    //   {
-    //     // browse to http://localhost:3000/ during development
-    //     host: 'localhost',
-    //     port: 3000,
-    //     // proxy the Webpack Dev Server endpoint
-    //     // (which should be serving on http://localhost:3100/)
-    //     // through BrowserSync
-    //     proxy: 'http://localhost:8080/'
-    //   },
-    //   // plugin options
-    //   {
-    //     // prevent BrowserSync from reloading the page
-    //     // and let Webpack Dev Server take care of this
-    //     reload: true
-    //   }
-    // )
+    new BrowserSyncPlugin(
+      // BrowserSync options
+      {
+        // browse to http://localhost:3000/ during development
+        host: 'localhost',
+        port: 3000,
+        // proxy the Webpack Dev Server endpoint
+        // (which should be serving on http://localhost:3100/)
+        // through BrowserSync
+        proxy: 'http://localhost:8080/'
+      },
+      // plugin options
+      {
+        // prevent BrowserSync from reloading the page
+        // and let Webpack Dev Server take care of this
+        reload: false
+      }
+    )
   ]
 }
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
+if (NODE_ENV === 'production') {
+  module.exports.devtool = 'source-map'
   module.exports.plugins = (module.exports.plugins || []).concat([
     new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i })
   ])
+  config.optimization.minimizer = [
+    new UglifyJsPlugin({
+      cache: true,
+      parallel: true,
+    })
+  ]
 }
+
+module.exports = config;
