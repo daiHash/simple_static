@@ -155,7 +155,7 @@ const config  = {
     new FriendlyErrorsWebpackPlugin(),
     // Create a favicon for each devices you have specified.
     new FaviconsWebpackPlugin({
-      logo: './assets/images/morty.png',
+      logo: './assets/images/schwifty.png',
       persistentCache: true,
       icons: {
         android: true,
