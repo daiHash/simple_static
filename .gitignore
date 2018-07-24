@@ -1,8 +1,6 @@
 .DS_Store
 node_modules/
 /dist/
-/src/assets/fonts
-/src/assets/images
 .node-version
 npm-debug.log*
 yarn-debug.log*
