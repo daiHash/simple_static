@@ -1,0 +1,29 @@
+language: node_js
+
+node_js:
+  - "8.9.4"
+
+cache:
+  directories:
+    - node_modules
+
+env:
+  - CI=true   
+
+branches:
+  only:
+    - master
+
+before_deploy:
+  - npm install netlify-cli -g
+  - npm run build
+
+install:
+  - npm install
+
+deploy:
+  provider: script
+  script: netlify deploy -s 6606544a-4b02-4968-a698-3f34087a9862 -t 0ab110fabdef784148599a95d8599eafb23d3ace000bad97ceeae9b7c10ef03e -p ./build
+  skip_cleanup: true
+  on:
+    branch: master
